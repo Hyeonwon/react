@@ -1,9 +1,17 @@
 import './App.css'
 
 function App() {
-  return (
-    <div>
 
+    let post = '강남 우동 맛집';
+
+
+  return (
+    <div className='App'>
+      <div className='black-nav'>
+        <h4 style={{color : 'red', fontSize : '16px'}}>블로그</h4>
+      </div>
+      <h4>{post}</h4> 
+      {/* 데이터 바인딩: {} */}
     </div>
   )
 }
