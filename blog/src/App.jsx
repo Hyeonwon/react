@@ -4,67 +4,61 @@ import { useState } from 'react';
 import './App.css'
 
 function App() {
-
-  let post = '강남 우동 맛집';
-  let [listTitle, listTitleChange] = useState(['남자코드 추천', '강남 우동맛집', '파이썬독학']);
-  let [good, goodChange] = useState([0,0,0]);
+  let [listTitle, setListTitle] = useState(['HTML/CSS', 'JavaScript', 'React']);
+  let [good, setGood] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
-
-  function clickListTitle(){
-    let copy = [...listTitle];
-    copy[0] = '여자코트 추천';
-    listTitleChange( copy );
-  }
-
-  function listTitleSort(){
-    let copy = [...listTitle];
-    copy.sort();
-    listTitleChange(copy);
-  }
-
-  function modalOnOff(){
-    setModal(prev => !prev);
-  }
+  let [title, setTitle] = useState(0);
+  let [inputVal, setInputVal] = useState('');
     
   return (
     <div className='App'>
       <div className='black-nav'>
-        <h4>ReactBLog</h4>
+        <h4>Tech BLog</h4>
       </div>
-      <button onClick={ listTitleSort }>가나다순</button>
-      <button onClick={ clickListTitle }>👀</button>
-
       {
         listTitle.map(function(a ,i){
           return(
             <div className='list' key={i}>
-              <h4>{ listTitle[i] }
-                <span onClick={ ( ) => { 
+              <h4 onClick={ () => {setModal(true); setTitle(i)} }>{ listTitle[i] }
+                <span onClick={ (e) => { e.stopPropagation(); 
                   const newGood = [...good];
                   newGood[i] += 1;
-                  goodChange(newGood);
-                } }>👍</span> { good[i] }
+                  setGood(newGood);
+                } }>👍</span> { good[i] } <button onClick={ (e) => {
+                  e.stopPropagation();
+                  const newList = listTitle.filter((_, idx) => idx !== i);
+                  setListTitle(newList);
+                  } }>삭제</button>
               </h4>
               <p>2월 17일 발행</p>
             </div>
           )
         })
       }
+
+      <input value={inputVal} onChange={ (e) => {setInputVal(e.target.value)} }/>
+      <button onClick={ () => {
+        const newList = [inputVal, ...listTitle];
+        setListTitle(newList);
+        const newInput = '';
+        setInputVal(newInput);
+      }}>글추가</button>
+
       {
-        modal == true ? <Modal/> : null    
+        modal == true ? <Modal listTitle={listTitle} title={title}/> : null    
       }
-      
       
     </div>
   )
 }
 
-function Modal(){
+function Modal(props){
   return(
     <div className='modal'>
-      <h4>제목</h4>
+      <h4>{props.listTitle[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button>글수정</button>
     </div>
   )
 }
