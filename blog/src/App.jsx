@@ -71,23 +71,21 @@ function App() {
       </div>
 
       <Modal/>
-
-
+      
     </div>
   )
 }
 
-{/* 컴포넌트 만드는 법
-1. function 만들고
-2. returen() 안에 html 담기
-3. <함수명></함수명> 쓰기 
-4. 바깥에 만들어야 한다.(중괄호 바깥)
-5. <함수명></함수명>, <함수명/> 둘 다 가능하다.*/}
+{/* */}
 
 // 장점
 // 1. 반복적인 html 축약할 때
 // 2. 큰 페이지
 // 3. 자주 변경되는 것들
+
+// 단점
+// 1. state 가져다 쓸 때 문제가 생긴다. -> A함수에 있던 변수는 B함수에서 맘대로 가져다 쓸 수 없음
+
 
 // fragment 문법
 // 의미없는 <div>대신 <></>사용이 가능하다.
@@ -102,7 +100,6 @@ function App() {
 //   </>
 // )
 
-
 function Modal(){
   return(
     <div className='modal'>
@@ -112,9 +109,7 @@ function Modal(){
     </div>
   )
 
-
-
-
 }
 
 export default App
+
